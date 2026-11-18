@@ -1,0 +1,12 @@
+{
+  "name": "projeto-09-reserva-salas-brasilapi",
+  "version": "1.0.0",
+  "description": "Projeto 09 (EXTRA) - Desenvolvimento Web III: Sistema de Reserva de Salas (CRUD Salas e Reservas + BrasilAPI Feriados 2026) em Node.js puro sem frameworks",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Deivid da Silva Afonso",
+  "license": "MIT"
+}

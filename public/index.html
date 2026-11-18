@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema de Reserva de Salas (BrasilAPI Feriados 2026) - Projeto 09 EXTRA DWIII</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Sistema de Reserva de Salas — Projeto 09 EXTRA (DWIII)</h1>
+    <p>CRUD de Salas e Reservas em Node.js puro (sem frameworks) com validação de conflitos de horário, capacidade, status da sala e verificação de feriados nacionais de 2026 via <strong>BrasilAPI</strong>.</p>
+
+    <div class="card">
+      <h2>1. Gerenciar Salas e Laboratórios (<code>/api/salas</code>)</h2>
+      <form id="formSala">
+        <input type="hidden" id="salaId" />
+        <div class="grid">
+          <div><label>Nome da Sala / Laboratório *</label><input type="text" id="nomeSala" placeholder="Ex: Lab. Informática 04" required /></div>
+          <div><label>Bloco / Andar</label><input type="text" id="blocoSala" placeholder="Ex: Bloco B - 2º Andar" /></div>
+          <div><label>Capacidade Máxima (lugares) *</label><input type="number" id="capacidadeSala" min="1" required /></div>
+          <div><label>Recursos Disponíveis</label><input type="text" id="recursosSala" placeholder="Ex: Projetor, 40 PCs, Ar-condicionado" /></div>
+          <div>
+            <label>Status da Sala *</label>
+            <select id="ativaSala">
+              <option value="1">Ativa (Disponível para reservas)</option>
+              <option value="0">Inativa (Em manutenção / Bloqueada)</option>
+            </select>
+          </div>
+        </div>
+        <br />
+        <button type="submit" class="btn">Salvar Sala</button>
+      </form>
+      <div id="msgSala" class="msg"></div>
+
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Sala</th><th>Bloco</th><th>Capacidade</th><th>Recursos</th><th>Status</th><th>Ações</th></tr>
+        </thead>
+        <tbody id="tabelaSalas"></tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>2. Agendar Reserva (<code>/api/reservas</code> + Verificação de Feriados BrasilAPI 2026)</h2>
+      <form id="formReserva">
+        <input type="hidden" id="reservaId" />
+        <div class="grid">
+          <div>
+            <label>Sala *</label>
+            <select id="salaReserva" required><option value="">-- Selecione a Sala --</option></select>
+          </div>
+          <div><label>Solicitante / Docente *</label><input type="text" id="solicitanteReserva" required /></div>
+          <div><label>Finalidade / Disciplina</label><input type="text" id="finalidadeReserva" placeholder="Ex: Aula de Desenvolvimento Web III" /></div>
+          <div><label>Data da Reserva (Verifica Feriados 2026) *</label><input type="date" id="dataReserva" required /></div>
+          <div><label>Horário de Início *</label><input type="time" id="horaInicioReserva" required /></div>
+          <div><label>Horário de Término *</label><input type="time" id="horaFimReserva" required /></div>
+          <div><label>Qtd. de Participantes *</label><input type="number" id="participantesReserva" min="1" required /></div>
+          <div>
+            <label>Status da Reserva</label>
+            <select id="statusReserva">
+              <option value="Ativa">Ativa</option>
+              <option value="Cancelada">Cancelada</option>
+            </select>
+          </div>
+        </div>
+        <br />
+        <button type="submit" class="btn">Confirmar Reserva</button>
+      </form>
+      <div id="alertaFeriado" class="msg"></div>
+      <div id="msgReserva" class="msg"></div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Sala</th>
+            <th>Solicitante</th>
+            <th>Finalidade</th>
+            <th>Data</th>
+            <th>Horário</th>
+            <th>Participantes</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tabelaReservas"></tbody>
+      </table>
+    </div>
+  </div>
+  <script src="/script.js"></script>
+</body>
+</html>
